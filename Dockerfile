@@ -13,10 +13,10 @@ COPY . .
 # Build the TypeScript code
 RUN pnpm run build-local
 # Expose the app
-EXPOSE 9000
-
 FROM nginx:alpine AS runtime
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 9000
 # Start the application
 CMD ["pnpm", "start"]
