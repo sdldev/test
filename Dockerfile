@@ -1,5 +1,5 @@
 # Use an official Node.js, and it should be version 16 and above
-FROM node:20-alpine
+FROM node:lts AS build
 # Set the working directory in the container
 WORKDIR /app
 # Copy package.json and pnpm-lock.yaml
@@ -14,5 +14,9 @@ COPY . .
 RUN pnpm run build
 # Expose the app
 EXPOSE 9000
+
+FROM nginx:alpine AS runtime
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist /usr/share/nginx/html
 # Start the application
 CMD ["pnpm", "start"]
