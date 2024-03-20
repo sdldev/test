@@ -11,7 +11,7 @@ RUN pnpm i
 # Copy the application code 
 COPY . .
 # Build the TypeScript code
-RUN pnpm run build
+RUN pnpm run build-local
 # Expose the app
 EXPOSE 9000
 
