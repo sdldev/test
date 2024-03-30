@@ -11,7 +11,7 @@ RUN pnpm i
 # Copy the application code 
 COPY . .
 # Build the TypeScript code
-RUN pnpm run build-local
+RUN pnpm run build
 # Expose the app
 FROM nginx:alpine AS runtime
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
